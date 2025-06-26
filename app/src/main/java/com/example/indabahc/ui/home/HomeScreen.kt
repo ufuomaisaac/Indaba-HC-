@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,31 +23,29 @@ fun GradientHalfScreen() {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
 
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(screenHeight)
+            .background(Color.White),
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(screenHeight/2)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(GradientGreen, Color.White)
+                )
+            )
+    )
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Top half with gradient
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(screenHeight / 2)
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(GradientGreen, Color.White)
-                    )
-                )
-        )
 
-        // Bottom half - replace with any content
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(screenHeight / 2)
-                .background(Color.White),
-            contentAlignment = Alignment.Center
-        ) {
 
-        }
     }
 }
 
