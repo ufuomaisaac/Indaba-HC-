@@ -22,15 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.indabahc.ui.theme.IndabaHCTheme
-
+import com.example.indabahc.ui.theme.ButtonColor
 
 @Composable
 fun JetsnackButton(
@@ -39,14 +35,14 @@ fun JetsnackButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = ButtonShape,
     border: BorderStroke? = null,
-    contentColor: Color = IndabaHCTheme.colors.textInteractive,
+    contentColor: Color = ButtonColor,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     JetsnackSurface(
         shape = shape,
         color = Color.Transparent,
-        contentColor = contentColor ,
+        contentColor = contentColor,
         border = border,
         modifier = modifier
             .clickable(

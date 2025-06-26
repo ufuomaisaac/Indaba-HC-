@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.indabahc.ui.theme.GradientGreen
+import com.example.indabahc.ui.theme.GGreen
 
 @Composable
 fun GradientHalfScreen() {
@@ -36,7 +36,7 @@ fun GradientHalfScreen() {
             .height(screenHeight/2)
             .background(
                 brush = Brush.verticalGradient(
-                    colors = listOf(GradientGreen, Color.White)
+                    colors = listOf(GGreen, Color.White)
                 )
             )
     )
