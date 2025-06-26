@@ -2,12 +2,12 @@ package com.example.indabahc.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val GradientGreen =Color(0xFFB5F534)
+val GGreen =Color(0xFFB5F534)
+val GWhite =Color(0xFFD9D9D9)
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+var ButtonColor = Color(0xFFB6F075)
+var readMoreColor = Color(0xFF1E1E1E)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+var dietAndMealColor = Color(0xFFEEF8FE)
+var meditationColor = Color(0xFFFFFAE3)
+var PainAndSymthomsColor = Color(0xFFF5EFFC)
