@@ -38,11 +38,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.indabahc.R
 import com.example.indabahc.ui.theme.GGreen
+import com.example.indabahc.ui.theme.GWhite
 
 
 @Composable
@@ -55,7 +57,7 @@ fun MedicationScreen(modifier: Modifier,
         modifier = Modifier
             .fillMaxWidth()
             .height(screenHeight)
-            .background(Color.White),
+            .background(GWhite),
     )
 
     Box(
@@ -64,7 +66,7 @@ fun MedicationScreen(modifier: Modifier,
             .height(screenHeight/2)
             .background(
                 brush = Brush.verticalGradient(
-                    colors = listOf(GGreen, Color.White)
+                    colors = listOf(GGreen, GWhite)
                 )
             )
     )
@@ -105,9 +107,16 @@ fun MedicationScreen(modifier: Modifier,
 @Composable
 @Preview
 fun previewFunction() {
-    MedicationScreen(
+    TopAppBar(
+        iconRes1 = R.drawable.arrow_left,
+        iconRes2 = R.drawable.diet,
+        title = "Medication Tracking",
         modifier = Modifier
-    ) { }
+    )
+
+    /*MedicationScreen(
+        modifier = Modifier
+    ) { }*/
 
 }
 
@@ -168,8 +177,70 @@ fun AnswerButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
     }
 }
 
+@Composable
+fun TopAppBar(
+    @DrawableRes iconRes1: Int,
+    @DrawableRes iconRes2: Int,
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color.White)
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Left Icon
+        Box(
+            modifier = Modifier
+                .size(32.dp)
+                .clip(CircleShape)
+                .background(Color.White),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(id = iconRes1),
+                contentDescription = "Left icon",
+                tint = Color(0xFF000000),
+                modifier = Modifier.size(18.dp)
+            )
+        }
+
+        // Title Text
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp,
+                color = Color.Black
+            ),
+            modifier = Modifier.weight(1f),
+            textAlign = TextAlign.Center
+        )
+
+        // Right Icon
+        Box(
+            modifier = Modifier
+                .size(32.dp)
+                .clip(CircleShape)
+                .background(Color(0xFFB3E5FC)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(id = iconRes2),
+                contentDescription = "Right icon",
+                tint = Color(0xFF0277BD),
+                modifier = Modifier.size(18.dp)
+            )
+        }
+    }
+}
 
 
+/*
 @Composable
 fun TopAppBar(
     @DrawableRes iconRes1: Int,
@@ -227,7 +298,7 @@ fun TopAppBar(
                 )
             }
         }
-    }
+    }*/
 
     @Composable
     fun TimeOfMedicationInput(
@@ -323,4 +394,4 @@ fun TopAppBar(
             }
         }
     }
-}
+

@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.indabahc.R
 import com.example.indabahc.ui.theme.GGreen
+import com.example.indabahc.ui.theme.GWhite
 import com.example.indabahc.ui.theme.firstBox
 import com.example.indabahc.ui.theme.secondBox
 import com.example.indabahc.ui.theme.thirdBox
@@ -64,7 +65,7 @@ fun HomeScreen(modifier: Modifier,
         modifier = Modifier
             .fillMaxWidth()
             .height(screenHeight)
-            .background(Color.White),
+            .background(GWhite),
     )
 
     Box(
@@ -73,7 +74,7 @@ fun HomeScreen(modifier: Modifier,
             .height(screenHeight/2)
             .background(
                 brush = Brush.verticalGradient(
-                    colors = listOf(GGreen, Color.White)
+                    colors = listOf(GGreen, GWhite)
                 )
             )
     )
