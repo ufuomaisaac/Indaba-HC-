@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.indabahc.ui.home.GradientHalfScreen
 import com.example.indabahc.ui.home.Home
+import com.example.indabahc.ui.home.HomeScreen
 import com.example.indabahc.ui.theme.IndabaHCTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             IndabaHCTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    GradientHalfScreen()
+                    HomeScreen(Modifier.padding(innerPadding))
                 }
             }
         }
