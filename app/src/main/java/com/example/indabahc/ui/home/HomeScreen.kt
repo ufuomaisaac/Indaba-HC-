@@ -4,12 +4,15 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,8 +41,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.indabahc.R
 import com.example.indabahc.ui.theme.GGreen
+import com.example.indabahc.ui.theme.firstBox
+import com.example.indabahc.ui.theme.secondBox
+import com.example.indabahc.ui.theme.thirdBox
 
 @Composable
 fun HomeScreen(modifier: Modifier) {
@@ -65,11 +72,14 @@ fun HomeScreen(modifier: Modifier) {
     )
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
         Spacer(Modifier.height(50.dp))
 
         GreetingHeader(R.drawable.avatars) { }
+        CurvedRectangle ()
 
     }
 }
@@ -82,7 +92,7 @@ fun GreetingHeader(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(bottom = 32.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -96,15 +106,6 @@ fun GreetingHeader(
                         .clip(CircleShape)
                         .border(1.dp, Color.White, CircleShape)
                 )
-                // Green online dot
-               /* Box(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .background(Color.Green, CircleShape)
-                        .border(1.dp, Color.White, CircleShape)
-                        .align(Alignment.BottomEnd)
-                        .offset(x = (-2).dp, y = (-2).dp)
-                )*/
             }
             Spacer(modifier = Modifier.width(12.dp))
             Column {
@@ -151,32 +152,155 @@ fun GreetingHeader(
                     .background(Color(0xFFFF5722), CircleShape)
             )
         }
-
-
     }
 }
 
 @Composable
 fun CurvedRectangle(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = Color(0xFFEFF6E0), // light greenish background
+    backgroundColor: Color = Color.White, // light greenish background
     cornerRadius: Dp = 16.dp,
-    content: @Composable BoxScope.() -> Unit
+    //content: @Composable BoxScope.() -> Unit
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(120.dp) // or any height you want
+            .height(IntrinsicSize.Min)
             .clip(RoundedCornerShape(cornerRadius))
             .background(backgroundColor)
             .padding(16.dp),
-        content = content
-    )
+    )  {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+
+
+        ) {
+        //box 1
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(firstBox),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(Modifier.padding(8.dp)) {
+
+                    // Icon circle
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFFB3E5FC)), // Icon circle color
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.book),
+                            contentDescription = "",
+                            tint = Color(0xFF0277BD), // Optional tint for icon
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Title text
+                    Text(
+                        text = "Diet meal & Tracking",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black,
+                            fontSize = 12.sp
+                        )
+                    )
+                }
+            }
+        //box 2
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(secondBox),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(Modifier.padding(8.dp)) {
+
+                    // Icon circle
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFFFFED8C)), // Icon circle color
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.mediatation),
+                            contentDescription = "",
+                            tint = Color(0xFF0277BD), // Optional tint for icon
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Title text
+                    Text(
+                        text = "Medication Tracking",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black,
+                            fontSize = 12.sp
+                        )
+                    )
+                }
+            }
+
+            //box 3
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(thirdBox),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(Modifier.padding(8.dp)) {
+
+                    // Icon circle
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFFDBB9F1)), // Icon circle color
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.diet),
+                            contentDescription = "",
+                            tint = Color(0xFF0277BD), // Optional tint for icon
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Title text
+                    Text(
+                        text = "Diet meal & Tracking",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black,
+                            fontSize = 12.sp
+                        )
+                    )
+                }
+            }
+        }
+
+    }
 }
-
-
-
-
 
 
 @Composable
