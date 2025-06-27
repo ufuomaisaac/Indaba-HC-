@@ -1,15 +1,19 @@
 package com.example.indabahc.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -20,10 +24,17 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
@@ -39,7 +50,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -60,6 +74,13 @@ fun HomeScreen(modifier: Modifier,
                onPainCardClicked: () -> Unit) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
+
+    val articles = listOf(
+        ArticleData("Healthy Diet", "Tips for balanced nutrition every day.", R.drawable.ab3_stretching),
+        ArticleData("Mental Health", "Understanding stress and how to manage it.", R.drawable.ab3_stretching),
+        ArticleData("Exercise", "Why daily movement matters.", R.drawable.ab2_quick_yoga),
+        ArticleData("Sleep Well", "Benefits of good sleep hygiene.", R.drawable.ab2_quick_yoga),
+    )
 
     Box(
         modifier = Modifier
@@ -83,6 +104,8 @@ fun HomeScreen(modifier: Modifier,
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+
     ) {
         Spacer(Modifier.height(50.dp))
 
@@ -98,6 +121,15 @@ fun HomeScreen(modifier: Modifier,
         Spacer(Modifier.height(16.dp))
         MealCard2()
 
+        Spacer(Modifier.height(16.dp))
+        LinkBox(
+            title = "Start Chat",
+            subtitle = "Go to our chat screen",
+            link = "https://ulcermate-app.streamlit.app/"
+        )
+
+
+
     }
 }
 
@@ -106,6 +138,7 @@ fun GreetingHeader(
     @DrawableRes userImageRes: Int,
     onBellClick: () -> Unit = {}
 ) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -443,6 +476,179 @@ fun MealCard2() {
         }
     }
 }
+
+@Composable
+fun ArticleBox(
+    title: String,
+    subtitle: String,
+    imageRes: Int?,
+    onReadMore: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f),
+        elevation = CardDefaults.cardElevation(4.dp),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(12.dp)
+        ) {
+            imageRes?.let {
+                Image(
+                    painter = painterResource(id = it),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .clip(RoundedCornerShape(8.dp)),
+                    contentScale = ContentScale.Crop
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1
+            )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.Gray,
+                maxLines = 2
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = onReadMore,
+                modifier = Modifier.align(Alignment.End),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
+            ) {
+                Text("Read More", style = MaterialTheme.typography.labelSmall)
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ArticleGrid(articles: List<ArticleData>, onReadMoreClick: (ArticleData) -> Unit) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(articles) { article ->
+            ArticleBox(
+                title = article.title,
+                subtitle = article.subtitle,
+                imageRes = article.imageRes,
+                onReadMore = { onReadMoreClick(article) }
+            )
+        }
+    }
+}
+
+
+data class ArticleData(
+    val title: String,
+    val subtitle: String,
+    val imageRes: Int? = null
+)
+
+@Composable
+fun LinkBox(
+    title: String,
+    url: String
+) {
+    val context = LocalContext.current
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                context.startActivity(intent)
+            }
+            .background(Color.White, shape = RoundedCornerShape(12.dp))
+            .border(1.dp, Color.LightGray, shape = RoundedCornerShape(12.dp))
+            .padding(16.dp)
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+            color = Color.Black
+        )
+    }
+}
+
+@Composable
+fun LinkBox(
+    title: String,
+    subtitle: String = "Tap to continue",
+    link: String, // Can be a route or URL
+    icon: ImageVector = Icons.Default.Build
+) {
+    val context = LocalContext.current
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(
+                brush = Brush.horizontalGradient(
+                    listOf(Color(0xFF4CAF50), Color(0xFF81C784)) // Green gradient
+                )
+            )
+            .clickable {
+                // Handle the link: open in browser
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                context.startActivity(intent)
+            }
+            .padding(20.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(28.dp)
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column {
+                Text(
+                    text = title,
+                    color = Color.White,
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                )
+                Text(
+                    text = subtitle,
+                    color = Color.White.copy(alpha = 0.85f),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+        }
+    }
+}
+
+
 
 @Composable
 @Preview
