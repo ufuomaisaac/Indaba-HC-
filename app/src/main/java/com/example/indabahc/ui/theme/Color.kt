@@ -2,7 +2,7 @@ package com.example.indabahc.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val GGreen =Color(0xFFD9D9D9)
+val GGreen =Color(0xFFB5F534)
 val GWhite =Color(0xFFFFFFFF)
 
 var ButtonColor = Color(0xFFB6F075)
