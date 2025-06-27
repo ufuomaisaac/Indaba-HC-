@@ -53,7 +53,10 @@ import com.example.indabahc.ui.theme.secondBox
 import com.example.indabahc.ui.theme.thirdBox
 
 @Composable
-fun HomeScreen(modifier: Modifier) {
+fun HomeScreen(modifier: Modifier,
+               onDietCardClicked : () -> Unit,
+               onMedicationCardClicked : () -> Unit,
+               onPainCardClicked: () -> Unit) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
 
@@ -339,7 +342,7 @@ fun MealCard1() {
 
                 Text(
                     text = "Bread & egg with juice",
-                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
                     color = Color.Black
                 )
             }
@@ -398,7 +401,7 @@ fun MealCard2() {
 
                 Text(
                     text = "Yam & Stew with juice",
-                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
                     color = Color.Black
                 )
             }
@@ -433,7 +436,10 @@ fun MealCard2() {
 @Preview
 fun previewFunction() {
     HomeScreen(
-        modifier = Modifier
+        modifier = Modifier,
+        onDietCardClicked = TODO(),
+        onMedicationCardClicked = TODO(),
+        onPainCardClicked = TODO()
     )
 }
 

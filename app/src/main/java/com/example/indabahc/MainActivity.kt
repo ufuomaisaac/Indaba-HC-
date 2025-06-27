@@ -22,7 +22,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             IndabaHCTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(Modifier.padding(innerPadding))
+                    HomeScreen(
+                        Modifier.padding(innerPadding),
+                        onDietCardClicked = {},
+                        onMedicationCardClicked = {},
+                        onPainCardClicked = {}
+                    )
                 }
             }
         }
