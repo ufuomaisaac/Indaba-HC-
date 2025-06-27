@@ -86,7 +86,12 @@ fun HomeScreen(modifier: Modifier,
         Spacer(Modifier.height(50.dp))
 
         GreetingHeader(R.drawable.avatars) { }
-        CurvedRectangle ()
+        CurvedRectangle(
+            modifier = Modifier,
+            onDietCardClicked = onDietCardClicked,
+            onMedicationCardClicked = onMedicationCardClicked,
+            onPainCardClicked = onPainCardClicked
+        )
         Spacer(Modifier.height(16.dp))
         MealCard1()
         Spacer(Modifier.height(16.dp))
@@ -171,6 +176,9 @@ fun CurvedRectangle(
     modifier: Modifier = Modifier,
     backgroundColor: Color = Color.White, // light greenish background
     cornerRadius: Dp = 16.dp,
+    onDietCardClicked : () -> Unit,
+    onMedicationCardClicked : () -> Unit,
+    onPainCardClicked: () -> Unit
     //content: @Composable BoxScope.() -> Unit
 ) {
     Box(
@@ -193,7 +201,8 @@ fun CurvedRectangle(
                     .weight(1f)
                     .aspectRatio(1f)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(firstBox),
+                    .background(firstBox)
+                    .clickable { onDietCardClicked() },
                 contentAlignment = Alignment.Center
             ) {
                 Column(Modifier.padding(8.dp)) {
@@ -233,7 +242,8 @@ fun CurvedRectangle(
                     .weight(1f)
                     .aspectRatio(1f)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(secondBox),
+                    .background(secondBox)
+                    .clickable { onMedicationCardClicked() },
                 contentAlignment = Alignment.Center
             ) {
                 Column(Modifier.padding(8.dp)) {
@@ -274,10 +284,12 @@ fun CurvedRectangle(
                     .weight(1f)
                     .aspectRatio(1f)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(thirdBox),
+                    .background(thirdBox)
+                    .clickable { onPainCardClicked() },
                 contentAlignment = Alignment.Center
             ) {
-                Column(Modifier.padding(8.dp)) {
+                Column(Modifier.padding(8.dp)
+                    .clickable {  }) {
 
                     // Icon circle
                     Box(
@@ -309,7 +321,6 @@ fun CurvedRectangle(
                 }
             }
         }
-
     }
 }
 

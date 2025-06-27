@@ -7,6 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.indabahc.MainActivity
+import com.example.indabahc.ui.Destinations.Diet
+import com.example.indabahc.ui.Destinations.Medication
+import com.example.indabahc.ui.Destinations.Pain
 import com.example.indabahc.ui.home.HomeScreen
 
 
@@ -19,6 +22,7 @@ object Destinations{
 
 @Composable
 fun OnEntryNavigation(
+    modifier: Modifier,
     navController: NavHostController = rememberNavController(),
     context: MainActivity
 ) {
@@ -30,18 +34,22 @@ fun OnEntryNavigation(
         composable(route = "home") {
             HomeScreen(
                 modifier = Modifier,
-                onDietCardClicked = {},
-                onMedicationCardClicked = {},
-                onPainCardClicked =  {},
+                onDietCardClicked = {{navController.navigate(route = Diet)}},
+                onMedicationCardClicked = {navController.navigate(route = Medication)},
+                onPainCardClicked =  {navController.navigate(route = Pain)},
             )
         }
 
         composable(route = "diet") {
 
+
         }
 
         composable(route = "medication") {
-
+            MedicationScreen(
+                modifier = Modifier,
+                onNavUp = {navController.navigateUp()}
+            )
 
         }
 

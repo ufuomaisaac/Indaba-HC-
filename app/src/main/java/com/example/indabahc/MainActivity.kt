@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.indabahc.ui.OnEntryNavigation
 import com.example.indabahc.ui.home.Home
 import com.example.indabahc.ui.home.HomeScreen
 import com.example.indabahc.ui.theme.IndabaHCTheme
@@ -22,12 +23,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             IndabaHCTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(
-                        Modifier.padding(innerPadding),
-                        onDietCardClicked = {},
-                        onMedicationCardClicked = {},
-                        onPainCardClicked = {}
-                    )
+                   OnEntryNavigation(
+                       Modifier.padding(innerPadding),
+                       context = this
+                   )
                 }
             }
         }
