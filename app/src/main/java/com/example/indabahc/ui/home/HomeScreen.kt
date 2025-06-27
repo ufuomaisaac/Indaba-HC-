@@ -24,6 +24,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -80,6 +84,10 @@ fun HomeScreen(modifier: Modifier) {
 
         GreetingHeader(R.drawable.avatars) { }
         CurvedRectangle ()
+        Spacer(Modifier.height(16.dp))
+        MealCard1()
+        Spacer(Modifier.height(16.dp))
+        MealCard2()
 
     }
 }
@@ -288,7 +296,7 @@ fun CurvedRectangle(
 
                     // Title text
                     Text(
-                        text = "Diet meal & Tracking",
+                        text = "Pain & Symptoms",
                         style = MaterialTheme.typography.bodySmall.copy(
                             fontWeight = FontWeight.SemiBold,
                             color = Color.Black,
@@ -302,6 +310,124 @@ fun CurvedRectangle(
     }
 }
 
+
+
+@Composable
+fun MealCard1() {
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White),
+        modifier = Modifier
+            .fillMaxWidth()
+
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "Breakfast meal 🍱",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Gray
+                )
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                Text(
+                    text = "Bread & egg with juice",
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    color = Color.Black
+                )
+            }
+
+            Column(horizontalAlignment = Alignment.End) {
+                // Status pill
+                Box(
+                    modifier = Modifier
+                        .background(Color(0xFFF3E8FF), shape = RoundedCornerShape(50))
+                        .padding(horizontal = 12.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "Good",
+                        color = Color(0xFFAA00FF),
+                        fontSize = 12.sp
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "8:00AM–9:00AM",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.DarkGray
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun MealCard2() {
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White),
+        modifier = Modifier
+            .fillMaxWidth()
+
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = " meal 🍱",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Gray
+                )
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                Text(
+                    text = "Yam & Stew with juice",
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    color = Color.Black
+                )
+            }
+
+            Column(horizontalAlignment = Alignment.End) {
+                // Status pill
+                Box(
+                    modifier = Modifier
+                        .background(Color(0xFFF3E8FF), shape = RoundedCornerShape(50))
+                        .padding(horizontal = 12.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "Good",
+                        color = Color(0xFFAA00FF),
+                        fontSize = 12.sp
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "1:00PM–2:00PM",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.DarkGray
+                )
+            }
+        }
+    }
+}
 
 @Composable
 @Preview
