@@ -34,13 +34,15 @@ fun OnEntryNavigation(
         composable(route = "home") {
             HomeScreen(
                 modifier = Modifier,
-                onDietCardClicked = {{navController.navigate(route = Diet)}},
+                onDietCardClicked = {navController.navigate(route = Diet)},
                 onMedicationCardClicked = {navController.navigate(route = Medication)},
                 onPainCardClicked =  {navController.navigate(route = Pain)},
             )
         }
 
         composable(route = "diet") {
+            DietScreen(modifier = Modifier,
+                onNavUp = {navController.navigateUp()})
 
 
         }

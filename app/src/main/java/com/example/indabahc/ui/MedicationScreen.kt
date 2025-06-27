@@ -80,7 +80,7 @@ fun MedicationScreen(modifier: Modifier,
 
         TopAppBar(
             iconRes1 = R.drawable.arrow_left,
-            iconRes2 = R.drawable.diet,
+            iconRes2 = R.drawable.group_r,
             title = "Medication Tracking",
             modifier = Modifier
         )
@@ -172,7 +172,7 @@ fun AnswerButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
         Text(
             text = text,
             color = textColor,
-            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium)
+            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
         )
     }
 }
