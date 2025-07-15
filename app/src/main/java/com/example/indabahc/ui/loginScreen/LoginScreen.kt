@@ -15,7 +15,6 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import com.example.indabahc.ui.theme.ButtonColor
-import com.example.indabahc.ui.theme.GGreen
 
 
 @Composable
@@ -27,7 +26,6 @@ fun SignInScreen(
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    //val backgroundColor = Color(0xFFCBEEA3)
     val backgroundColor = Color(0xFFFFFFFF)
 
 
