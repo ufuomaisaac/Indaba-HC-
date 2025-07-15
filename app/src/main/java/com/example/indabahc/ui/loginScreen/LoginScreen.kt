@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
+import com.example.indabahc.ui.theme.ButtonColor
+import com.example.indabahc.ui.theme.GGreen
 
 
 @Composable
@@ -25,7 +27,9 @@ fun SignInScreen(
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    val backgroundColor = Color(0xFFCBEEA3)
+    //val backgroundColor = Color(0xFFCBEEA3)
+    val backgroundColor = Color(0xFFFFFFFF)
+
 
     Column(
         modifier = Modifier
@@ -85,8 +89,9 @@ fun SignInScreen(
 
         Button(
             onClick = { onSignInClick(email, username, password) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
+            modifier = Modifier.fillMaxWidth(),
+            colors =   ButtonDefaults.buttonColors(containerColor = ButtonColor, contentColor = Color.Black)
+        ){
             Text("Sign In")
         }
     }
