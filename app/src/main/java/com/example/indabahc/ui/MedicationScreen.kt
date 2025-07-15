@@ -114,9 +114,7 @@ fun previewFunction() {
         modifier = Modifier
     )
 
-    /*MedicationScreen(
-        modifier = Modifier
-    ) { }*/
+
 
 }
 

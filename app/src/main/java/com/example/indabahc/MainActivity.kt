@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.indabahc.ui.OnEntryNavigation
 import com.example.indabahc.ui.home.Home
 import com.example.indabahc.ui.home.HomeScreen
+import com.example.indabahc.ui.loginScreen.SignInScreen
 import com.example.indabahc.ui.theme.IndabaHCTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,10 +24,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             IndabaHCTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   OnEntryNavigation(
+                  /* OnEntryNavigation(
                        Modifier.padding(innerPadding),
                        context = this
-                   )
+                   )*/
+                    SignInScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        onSignInClick = {_,_,_ -> }
+                    )
                 }
             }
         }
