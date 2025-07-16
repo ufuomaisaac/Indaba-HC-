@@ -14,13 +14,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavHostController
 import com.example.indabahc.ui.theme.ButtonColor
 
 
 @Composable
 fun SignInScreen(
     modifier : Modifier,
-    onSignInClick: (String, String, String) -> Unit
+    onSignInClick: (String, String, String) -> Unit,
 ) {
     var email by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }

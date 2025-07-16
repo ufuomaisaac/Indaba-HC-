@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.indabahc.ui.OnEntryNavigation
 import com.example.indabahc.ui.home.Home
 import com.example.indabahc.ui.home.HomeScreen
@@ -22,15 +24,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController: NavHostController = rememberNavController()
+
             IndabaHCTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                  /* OnEntryNavigation(
-                       Modifier.padding(innerPadding),
-                       context = this
-                   )*/
-                    SignInScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        onSignInClick = {_,_,_ -> }
+                    OnEntryNavigation(
+                        Modifier.padding(innerPadding),
+                        context = this
                     )
                 }
             }
@@ -44,12 +44,4 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    IndabaHCTheme {
-        Greeting("Android")
-    }
 }
