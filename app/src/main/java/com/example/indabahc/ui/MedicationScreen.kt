@@ -19,6 +19,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -43,64 +45,71 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.indabahc.R
+import com.example.indabahc.ui.theme.ButtonColor
 import com.example.indabahc.ui.theme.GGreen
 import com.example.indabahc.ui.theme.GWhite
 
-
 @Composable
-fun MedicationScreen(modifier: Modifier,
-               onNavUp : () -> Unit, ) {
+fun MedicationScreen(
+    modifier: Modifier = Modifier,
+    onNavUp: () -> Unit
+) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
 
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(screenHeight)
-            .background(GWhite),
-    )
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(screenHeight/2)
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(GGreen, GWhite)
-                )
-            )
-    )
-
-    Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-
+            .background(GWhite)
     ) {
-        Spacer(Modifier.height(50.dp))
-
-        TopAppBar(
-            iconRes1 = R.drawable.arrow_left,
-            iconRes2 = R.drawable.group_r,
-            title = "Medication Tracking",
+        // Top Gradient Background
+        Box(
             modifier = Modifier
+                .fillMaxWidth()
+                .height(screenHeight / 2)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(GGreen, GWhite)
+                    )
+                )
         )
 
-        Spacer(Modifier.height(50.dp))
+        // Foreground Content
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 80.dp) // space for bottom button
+        ) {
+            Spacer(Modifier.height(50.dp))
 
+            TopAppBar(
+                iconRes1 = R.drawable.arrow_left,
+                iconRes2 = R.drawable.group_r,
+                title = "Medication Tracking",
+                modifier = Modifier
+            )
 
-        TriggerFoodQuestion(
-            questionText = "Took Ulcer Medication Today?",
-        )
+            Spacer(Modifier.height(50.dp))
 
-        TriggerFoodQuestion(
-            questionText = "Took NSAIDs e.g(took ibuprofen) today",
-        )
+            TriggerFoodQuestion("Took Ulcer Medication Today?")
+            TriggerFoodQuestion("Took NSAIDs e.g (Ibuprofen) Today?")
+            TriggerFoodQuestion("Time of Medication")
+        }
 
-        TriggerFoodQuestion(
-            questionText = "Time of Medication",
-        )
-
-
+        // Bottom Submit Button
+        Button(
+            onClick = { /* handle click */ },
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = ButtonColor,
+                contentColor = Color.Black
+            )
+        ) {
+            Text("Submit")
+        }
     }
 }
 
@@ -238,66 +247,6 @@ fun TopAppBar(
 }
 
 
-/*
-@Composable
-fun TopAppBar(
-    @DrawableRes iconRes1: Int,
-    @DrawableRes iconRes2: Int,
-    title: String,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .padding(12.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .size(32.dp)
-                .clip(CircleShape)
-                .background(Color(0xFFFFFFFF)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                painter = painterResource(id = iconRes1),
-                contentDescription = title,
-                tint = Color(0xFF0277BD),
-                modifier = Modifier.size(18.dp)
-            )
-
-
-
-            Text(
-                //modifier = Modifier.weight(1f),
-                text = title,
-                style = MaterialTheme.typography.bodySmall.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black,
-                    fontSize = 20.sp
-                )
-
-            )
-
-            Box(
-                modifier = Modifier
-                    .size(32.dp)
-                    .clip(CircleShape)
-                    .background(Color(0xFFB3E5FC)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painter = painterResource(id = iconRes2),
-                    contentDescription = title,
-                    tint = Color(0xFF0277BD),
-                    modifier = Modifier.size(18.dp)
-                )
-            }
-        }
-    }*/
-
     @Composable
     fun TimeOfMedicationInput(
         timeValue: String,
@@ -364,14 +313,6 @@ fun TopAppBar(
                         },
                         shape = RoundedCornerShape(6.dp),
                         textStyle = MaterialTheme.typography.bodyMedium,
-                        /*colors = TextFieldDefaults.outlinedTextFieldColors(
-                        disabledTextColor = Color.Black,
-                        disabledTrailingIconColor = Color.Gray,
-                        disabledBorderColor = Color.LightGray,
-                        disabledPlaceholderColor = Color.Gray,
-                        disabledLabelColor = Color.Gray,
-                        containerColor = Color.White
-                    )*/
                     )
 
                     DropdownMenu(
