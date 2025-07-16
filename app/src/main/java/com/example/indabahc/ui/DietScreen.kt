@@ -54,7 +54,7 @@ fun DietScreen(
             .fillMaxSize()
             .background(GWhite)
     ) {
-        // Gradient background (top half)
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -66,7 +66,6 @@ fun DietScreen(
                 )
         )
 
-        // Foreground content
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -104,7 +103,6 @@ fun DietScreen(
         }
     }
 }
-
 
 @Composable
 @Preview
